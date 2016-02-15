@@ -8,11 +8,16 @@
 
 
 #define K_matio .7f
+#define K_Url @"http://dwz.cn/2hbCBD"
 
 #import "ShareView.h"
 #import "shareButton.h"
 #import "UIView+Extension.h"
 #import "UMSocial.h"
+
+#import "UMSocialQQHandler.h"  //  qq以及qq空间
+#import "UMSocialSinaHandler.h"  // 新浪
+#import "UMSocialWechatHandler.h"  // 微信
 
 @interface ShareView ()
 
@@ -31,6 +36,25 @@
 @end
 
 @implementation ShareView
+
+/**UM设置的一些基本信息*/
++ (void)registUMInfo{
+    
+  
+        [UMSocialData setAppKey:@"5656f0b567e58ea178001a93"];
+        //打开调试log的开关
+        [UMSocialData openLog:YES];
+        //  qq
+        [UMSocialQQHandler setQQWithAppId:@"1104919337" appKey:@"9eeUUkEtVHbUAC4G" url:K_Url];
+        //设置支持没有客户端情况下使用SSO授权
+        [UMSocialQQHandler setSupportWebView:YES];
+        // 新浪
+        //打开新浪微博的SSO开关，设置新浪微博回调地址，这里必须要和你在新浪微博后台设置的回调地址一致。若在新浪后台设置我们的回调地址，“http://sns.whalecloud.com/sina2/callback”，这里可以传nil
+        [UMSocialSinaHandler openSSOWithRedirectURL:K_Url];
+        //设置微信AppId、appSecret，分享url
+        [UMSocialWechatHandler setWXAppId:@"wx2d632b14a1e070bf" appSecret:@"d4624c36b6795d1d99dcf0547af5443d" url:K_Url];
+    
+}
 
 
 - (instancetype)initWithFrame:(CGRect)frame

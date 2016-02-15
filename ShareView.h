@@ -21,6 +21,8 @@
 
 @property (nonatomic ,weak)id <ShareViewDelegate>delegate;
 
+/**UM设置的一些基本信息*/
++ (void)registUMInfo;
 
 - (void)appear;
 
